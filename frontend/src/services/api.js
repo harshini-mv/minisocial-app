@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://minisocial-backend-9zed.onrender.com/",
+  baseURL: "https://minisocial-backend-9zed.onrender.com/auth/login",
 });
 
 export default API;
