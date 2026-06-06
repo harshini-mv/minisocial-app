@@ -8,11 +8,17 @@ const {
   getPosts,
   likePost,
   commentOnPost,
+  deletePost,
 } = require("../controllers/postController");
 
 router.get("/", getPosts);
+
 router.post("/", authMiddleware, createPost);
+
 router.put("/:id/like", authMiddleware, likePost);
+
 router.post("/:id/comment", authMiddleware, commentOnPost);
+
+router.delete("/:id", authMiddleware, deletePost);
 
 module.exports = router;

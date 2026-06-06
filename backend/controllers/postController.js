@@ -139,3 +139,34 @@ exports.commentOnPost = async (req, res) => {
     });
   }
 };
+
+exports.deletePost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).json({
+        message: "Post not found",
+      });
+    }
+
+    if (post.user.toString() !== req.user.userId) {
+      return res.status(403).json({
+        message: "Not authorized",
+      });
+    }
+
+    await Post.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      message: "Post deleted successfully",
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
+};
